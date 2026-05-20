@@ -1,3 +1,5 @@
+'use client';
+
 import { motion } from 'framer-motion';
 import { Monitor, ShoppingCart, Settings, TrendingUp, Code, Smartphone } from 'lucide-react';
 
