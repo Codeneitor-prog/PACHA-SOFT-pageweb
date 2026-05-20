@@ -589,7 +589,7 @@ export default function AdminPage() {
                   <button onClick={() => startEditingTestimonial(t)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
                     <Edit size={18} /> Editar
                   </button>
-                  <button onClick={() => deleteTestimonial(t.id)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors">
+                  <button onClick={() => t.id && deleteTestimonial(t.id)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors">
                     <Trash2 size={18} /> Eliminar
                   </button>
                 </div>
@@ -645,7 +645,7 @@ export default function AdminPage() {
                     <button onClick={() => startEditingProject(p)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
                       <Edit size={18} /> Editar
                     </button>
-                    <button onClick={() => deleteProject(p.id)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors">
+                    <button onClick={() => p.id && deleteProject(p.id)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors">
                       <Trash2 size={18} /> Eliminar
                     </button>
                   </div>
@@ -685,7 +685,7 @@ export default function AdminPage() {
                     <button onClick={() => startEditingTeamMember(m)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors">
                       <Edit size={18} /> Editar
                     </button>
-                    <button onClick={() => deleteTeamMember(m.id)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors">
+                    <button onClick={() => m.id && deleteTeamMember(m.id)} className="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 rounded-xl font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors">
                       <Trash2 size={18} /> Eliminar
                     </button>
                   </div>
@@ -758,7 +758,7 @@ export default function AdminPage() {
                   <button onClick={() => startEditingPricingPlan(p)} className="flex-1 py-2 rounded-lg font-semibold bg-blue-500/20 text-blue-400 hover:bg-blue-500/30 transition-colors flex items-center justify-center gap-2 text-sm">
                     <Edit size={16} /> Editar
                   </button>
-                  <button onClick={() => deletePricingPlan(p.id)} className="flex-1 py-2 rounded-lg font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors flex items-center justify-center gap-2 text-sm">
+                  <button onClick={() => p.id && deletePricingPlan(p.id.toString())} className="flex-1 py-2 rounded-lg font-semibold bg-red-500/20 text-red-400 hover:bg-red-500/30 transition-colors flex items-center justify-center gap-2 text-sm">
                     <Trash2 size={16} /> Eliminar
                   </button>
                 </div>
@@ -794,7 +794,7 @@ export default function AdminPage() {
                       <button onClick={() => startEditingComparisonFeature(f)} className="p-2 rounded bg-blue-500/20 text-blue-400 hover:bg-blue-500/30">
                         <Edit size={16} />
                       </button>
-                      <button onClick={() => deleteComparisonFeature(f.id)} className="p-2 rounded bg-red-500/20 text-red-400 hover:bg-red-500/30">
+                      <button onClick={() => f.id && deleteComparisonFeature(f.id.toString())} className="p-2 rounded bg-red-500/20 text-red-400 hover:bg-red-500/30">
                         <Trash2 size={16} />
                       </button>
                     </td>
