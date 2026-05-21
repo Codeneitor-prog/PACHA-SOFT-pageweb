@@ -119,10 +119,10 @@ export default function Home() {
       <section ref={containerRef} className="h-[300vh] md:h-[500vh] relative w-full overflow-x-hidden">
         <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-center items-center text-center px-6 bg-transparent">
           
-          {/* TÍTULO HERO: ABSOLUTO PARA SOBREPONERSE A TODO */}
+          {/* TÍTULO HERO: FIJO EN PANTALLA MIENTRAS DURE LA ANIMACIÓN */}
           <motion.div 
             style={{ opacity }}
-            className="absolute inset-0 z-[100] flex flex-col justify-center items-center px-6"
+            className="fixed inset-0 z-[100] flex flex-col justify-center items-center px-6"
           >
 
             <div className="max-w-5xl space-y-4 md:space-y-8">
