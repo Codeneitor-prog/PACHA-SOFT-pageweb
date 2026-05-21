@@ -34,7 +34,7 @@ export default function PricingSection({ plans, settings }: PricingProps) {
         <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em]">
           {settings.pricing_header}
         </span>
-        <h2 className="text-4xl md:text-5xl font-black mt-6 mb-6 tracking-tighter">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mt-6 mb-6 tracking-tighter">
           <span className="text-white">{settings.pricing_title.split(' ').slice(0, -2).join(' ')} </span>
           <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4">{settings.pricing_title.split(' ').slice(-2).join(' ')}</span>
         </h2>

@@ -42,7 +42,7 @@ export default function ContactoPage() {
     if (typeof window !== 'undefined') {
       const searchParams = new URLSearchParams(window.location.search);
       if (searchParams.get('tab') === 'testimonial') {
-        setActiveTab('testimonial');
+        setTimeout(() => setActiveTab('testimonial'), 0);
       }
     }
   }, []);
@@ -144,7 +144,7 @@ export default function ContactoPage() {
           <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em]">
             Contáctanos
           </span>
-          <h1 className="text-5xl md:text-7xl font-black mt-6 mb-8 tracking-tighter flex justify-center gap-4 flex-wrap">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black mt-6 mb-8 tracking-tighter flex justify-center gap-4 flex-wrap">
             <span className="text-white">
               <TypingText text="Hablemos de Tu" className="inline-block" />
             </span>

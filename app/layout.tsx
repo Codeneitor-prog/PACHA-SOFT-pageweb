@@ -8,6 +8,7 @@ import CustomCursor from "@/components/CustomCursor";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import ExitIntentPopup from "@/components/ExitIntentPopup";
 import ScrollToTop from "@/components/ScrollToTop";
+import SmoothScroll from "@/components/SmoothScroll";
 
 const inter = Inter({ 
   subsets: ["latin"],
@@ -82,24 +83,26 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} antialiased selection:bg-electric-4 selection:text-white`}>
-        <ScrollToTop />
-        <div className="relative min-h-screen flex flex-col">
-          {/* Background Effects */}
-          <InteractiveBackground />
-          <CustomCursor />
-          <FloatingWhatsApp />
-          <ExitIntentPopup />
+      <body className={`${inter.variable} antialiased selection:bg-electric-4 selection:text-white overflow-x-hidden w-full`}>
+        <SmoothScroll>
+          <div className="relative min-h-screen flex flex-col overflow-x-hidden">
+            <ScrollToTop />
+            {/* Background Effects */}
+            <InteractiveBackground />
+            <CustomCursor />
+            <FloatingWhatsApp />
+            <ExitIntentPopup />
 
-          {/* Content */}
-          <div className="relative z-50 flex flex-col min-h-screen">
-            <Navbar />
-            <main className="flex-grow pt-24">
-              {children}
-            </main>
-            <Footer />
+            {/* Content */}
+            <div className="relative z-50 flex flex-col min-h-screen">
+              <Navbar />
+              <main className="flex-grow pt-16 md:pt-24">
+                {children}
+              </main>
+              <Footer />
+            </div>
           </div>
-        </div>
+        </SmoothScroll>
       </body>
     </html>
   );

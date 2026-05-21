@@ -88,9 +88,9 @@ export default function SobreNosotrosPage() {
           <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em]">
             SOBRE NOSOTROS
           </span>
-          <h1 className="text-5xl md:text-7xl font-black mt-6 mb-8 tracking-tighter flex justify-center gap-4 flex-wrap">
+          <h1 className="text-3xl sm:text-5xl md:text-7xl font-black mt-6 mb-8 tracking-tighter flex justify-center gap-4 flex-wrap">
             <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4 text-glow py-2 inline-block">
-              <TypingText text="PACHA SOFT" className="inline-block" />
+              <TypingText text="PACHA SOFT" className="inline-block mr-2" />
               <TypingText text="NUESTRA HISTORIA" className="inline-block" />
             </span>
           </h1>

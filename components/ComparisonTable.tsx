@@ -1,7 +1,6 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { cn } from '@/lib/utils';
 
 interface ComparisonFeature {
   id?: string | number;
@@ -25,7 +24,7 @@ export default function ComparisonTable({ features, settings }: ComparisonProps)
       viewport={{ once: true }}
       transition={{ duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
     >
-      <h3 className="text-3xl font-black text-center mb-10 tracking-tighter text-white">
+      <h3 className="text-2xl sm:text-3xl font-black text-center mb-10 tracking-tighter text-white">
         {settings.comparison_title}
       </h3>
       <div className="card-glass rounded-4xl overflow-hidden">

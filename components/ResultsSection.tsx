@@ -47,10 +47,10 @@ export default function ResultsSection() {
             viewport={{ once: true }}
             className="flex-1 space-y-8"
           >
-            <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight">
-              RESULTADOS <span className="text-electric-2">QUE SE NOTAN</span>
+            <h2 className="text-3xl sm:text-4xl md:text-6xl font-black text-white tracking-tighter leading-tight">
+              RESULTADOS <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4">QUE SE NOTAN</span>
             </h2>
-            <p className="text-gray-400 text-lg font-light leading-relaxed">
+            <p className="text-gray-400 text-base md:text-lg font-light leading-relaxed">
               No solo creamos páginas bonitas; construimos herramientas de alto rendimiento 
               diseñadas para cumplir objetivos comerciales reales.
             </p>

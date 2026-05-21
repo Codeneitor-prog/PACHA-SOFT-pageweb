@@ -150,14 +150,20 @@ export default function Home() {
         progress = 0;
       }
 
+      // --- OPTIMIZACIÓN MÓVIL: Respuesta más rápida ---
+      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
+      const sensitivity = isMobile ? 1.4 : 1; 
+      const adjustedProgress = Math.min(1, progress * sensitivity);
+
       // Tiempo objetivo exacto basado en el progreso del scroll (0 a 149)
-      targetFrame = progress * (frameCount - 1);
+      targetFrame = adjustedProgress * (frameCount - 1);
       
       // Efecto de mostrar contenido (textos)
-      if (progress > 0.4 && !showContentRef.current) {
+      const contentThreshold = isMobile ? 0.25 : 0.4;
+      if (progress > contentThreshold && !showContentRef.current) {
         showContentRef.current = true;
         setShowContent(true);
-      } else if (progress <= 0.4 && showContentRef.current) {
+      } else if (progress <= contentThreshold && showContentRef.current) {
         showContentRef.current = false;
         setShowContent(false);
       }
@@ -197,7 +203,7 @@ export default function Home() {
       <div className="fixed inset-0 bg-black/40 pointer-events-none -z-10"></div>
 
       {/* Hero Video Scrubbing Container */}
-      <section ref={containerRef} className="h-[800vh] relative w-full">
+      <section ref={containerRef} className="h-[500vh] md:h-[800vh] relative w-full overflow-x-hidden">
         <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-center items-center text-center px-6 bg-transparent">
 
           <motion.div
@@ -206,16 +212,16 @@ export default function Home() {
             transition={{ duration: 0.5 }}
             className="absolute inset-0 m-auto flex flex-col items-center justify-center text-electric-2 z-20 pointer-events-none drop-shadow-[0_0_20px_rgba(0,229,255,0.8)]"
           >
-            <span className="text-sm md:text-base font-bold uppercase tracking-[0.3em] mb-4 text-glow">
+            <span className="text-xs md:text-base font-bold uppercase tracking-[0.3em] mb-4 text-glow">
               Desliza hacia abajo
             </span>
-            <div className="p-3 rounded-full bg-electric-2/10 border border-electric-2/30 backdrop-blur-sm animate-bounce">
-              <ChevronDown className="w-8 h-8 md:w-10 md:h-10 text-electric-2" />
+            <div className="p-2 md:p-3 rounded-full bg-electric-2/10 border border-electric-2/30 backdrop-blur-sm animate-bounce">
+              <ChevronDown className="w-6 h-6 md:w-10 md:h-10 text-electric-2" />
             </div>
           </motion.div>
 
           <motion.div 
-            className="max-w-5xl space-y-8 z-10 relative"
+            className="max-w-5xl space-y-4 md:space-y-8 z-10 relative"
             initial={{ opacity: 0, y: 50 }}
             animate={{ 
               opacity: showContent ? 1 : 0, 
@@ -224,14 +230,14 @@ export default function Home() {
             }}
             transition={{ duration: 0.8, ease: "easeOut" }}
           >
-            <h1 className="text-5xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-2xl">
-              <TypingText text="TRANSFORMA TU" className="inline-block" /> <br />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4 text-glow py-2 inline-block">
+            <h1 className="text-3xl sm:text-4xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-2xl flex flex-col items-center gap-2">
+              <TypingText text="TRANSFORMA TU" className="inline-block" />
+              <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4 text-glow py-1 md:py-2 inline-block">
                 <TypingText text="PRESENCIA DIGITAL" delay={1} className="inline-block" />
               </span>
             </h1>
             
-            <p className="text-lg md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-light tracking-wide drop-shadow-lg">
+            <p className="text-sm md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-light tracking-wide drop-shadow-lg px-4">
               Creamos experiencias web modernas y corporativas que impulsan tu negocio 
               con tecnología de vanguardia y diseño de alto impacto.
             </p>

@@ -43,7 +43,7 @@ export default function ProcessSection() {
         <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em]">
           Nuestro Proceso
         </span>
-        <h2 className="text-4xl md:text-5xl font-black mt-6 mb-8 tracking-tighter">
+        <h2 className="text-3xl sm:text-4xl md:text-5xl font-black mt-6 mb-8 tracking-tighter">
           <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4 text-glow">Cómo </span>
           <span className="text-white">Trabajamos</span>
         </h2>

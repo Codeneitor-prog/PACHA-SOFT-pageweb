@@ -22,7 +22,7 @@ export default function PageHero({ title, subtitle, highlight, description }: Pa
         <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em]">
           {subtitle}
         </span>
-        <h1 className="text-5xl md:text-7xl font-black mt-6 mb-8 tracking-tighter flex justify-center gap-4 flex-wrap">
+        <h1 className="text-3xl sm:text-4xl md:text-7xl font-black mt-6 mb-8 tracking-tighter flex justify-center gap-2 sm:gap-4 flex-wrap">
           <span className="text-white">
             <TypingText text={title} className="inline-block" />
           </span>

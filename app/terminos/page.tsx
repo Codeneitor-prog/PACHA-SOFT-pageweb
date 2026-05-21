@@ -18,7 +18,7 @@ export default function TerminosPage() {
           <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em]">
             Contrato General de Adhesión
           </span>
-          <h1 className="text-4xl md:text-6xl font-black mt-6 mb-8 tracking-tighter flex justify-center gap-4 flex-wrap">
+          <h1 className="text-3xl sm:text-5xl md:text-6xl font-black mt-6 mb-8 tracking-tighter flex justify-center gap-4 flex-wrap">
             <span className="text-white">
               <TypingText text="Términos y" className="inline-block" />
             </span>
