@@ -71,6 +71,7 @@ export default function InteractiveBackground() {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
+    const particles: Particle[] = [];
     const isMobile = window.innerWidth < 768;
     const baseDensity = isMobile ? 80 : 40; 
     const particleCount = Math.min(Math.floor(dimensions.height / baseDensity), isMobile ? 40 : 120);
