@@ -120,39 +120,42 @@ export default function Home() {
       <section ref={containerRef} className="h-[300vh] md:h-[500vh] relative w-full overflow-x-hidden">
         <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-center items-center text-center px-6 bg-transparent">
           
+          {/* TÍTULO HERO: ABSOLUTO PARA SOBREPONERSE A TODO */}
           <motion.div 
             style={{ opacity, y }}
-            className="max-w-5xl space-y-4 md:space-y-8 z-[100] relative"
+            className="absolute inset-0 z-[100] flex flex-col justify-center items-center px-6"
           >
-            <h1 className="text-3xl sm:text-4xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-2xl flex flex-col items-center gap-2">
-              <TypingText text="TRANSFORMA TU" className="inline-block" />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4 text-glow py-1 md:py-2 inline-block">
-                <TypingText text="PRESENCIA DIGITAL" delay={1} className="inline-block" />
-              </span>
-            </h1>
-            
-            <p className="text-sm md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-light tracking-wide drop-shadow-lg px-4">
-              Creamos experiencias web modernas y corporativas que impulsan tu negocio 
-              con tecnología de vanguardia y diseño de alto impacto.
-            </p>
-            
-            <div className="flex flex-wrap items-center justify-center gap-6 pt-8">
-              <a 
-                href="#contacto"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                <button className="btn-primary py-4 px-10 text-sm tracking-[0.2em] font-medium drop-shadow-lg hover:scale-105 transition-transform">
-                  SOLICITAR COTIZACIÓN
-                </button>
-              </a>
-              <Link href="/portafolio">
-                <button className="relative group overflow-hidden py-4 px-10 rounded-full border border-electric-2/60 text-white text-sm tracking-[0.2em] font-medium transition-all duration-500 hover:border-electric-2 hover:bg-electric-2/10 backdrop-blur-sm">
-                  <span className="relative z-10">VER PORTAFOLIO</span>
-                </button>
-              </Link>
+            <div className="max-w-5xl space-y-4 md:space-y-8">
+              <h1 className="text-3xl sm:text-4xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-2xl flex flex-col items-center gap-2">
+                <TypingText text="TRANSFORMA TU" className="inline-block" />
+                <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4 text-glow py-1 md:py-2 inline-block">
+                  <TypingText text="PRESENCIA DIGITAL" delay={1} className="inline-block" />
+                </span>
+              </h1>
+              
+              <p className="text-sm md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-light tracking-wide drop-shadow-lg px-4">
+                Creamos experiencias web modernas y corporativas que impulsan tu negocio 
+                con tecnología de vanguardia y diseño de alto impacto.
+              </p>
+              
+              <div className="flex flex-wrap items-center justify-center gap-6 pt-8">
+                <a 
+                  href="#contacto"
+                  onClick={(e) => {
+                    e.preventDefault();
+                    document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
+                  }}
+                >
+                  <button className="btn-primary py-4 px-10 text-sm tracking-[0.2em] font-medium drop-shadow-lg hover:scale-105 transition-transform">
+                    SOLICITAR COTIZACIÓN
+                  </button>
+                </a>
+                <Link href="/portafolio">
+                  <button className="relative group overflow-hidden py-4 px-10 rounded-full border border-electric-2/60 text-white text-sm tracking-[0.2em] font-medium transition-all duration-500 hover:border-electric-2 hover:bg-electric-2/10 backdrop-blur-sm">
+                    <span className="relative z-10">VER PORTAFOLIO</span>
+                  </button>
+                </Link>
+              </div>
             </div>
           </motion.div>
         </div>
