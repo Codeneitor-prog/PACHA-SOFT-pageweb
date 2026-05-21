@@ -24,9 +24,9 @@ export default function Home() {
     offset: ["start start", "end end"]
   });
 
-  // Animación del contenido: aparecer al 15% y quedarse visible hasta el final del contenedor (0.95)
-  const opacity = useTransform(scrollYProgress, [0.1, 0.2, 0.9, 0.95], [0, 1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0.1, 0.2, 0.9, 0.95], [50, 0, 0, -50]);
+  // Animación del contenido: aparecer al 10% (0.1) y quedarse visible hasta casi el final (0.95)
+  const opacity = useTransform(scrollYProgress, [0.05, 0.15, 0.9, 0.95], [0, 1, 1, 0]);
+  const y = useTransform(scrollYProgress, [0.05, 0.15, 0.9, 0.95], [20, 0, 0, -20]);
 
   useEffect(() => {
     const loadImages = async () => {
