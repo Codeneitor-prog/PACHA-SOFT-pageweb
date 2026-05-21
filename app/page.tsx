@@ -26,7 +26,6 @@ export default function Home() {
 
   // Animación del contenido: se queda fijo (0-0.95) y sale al final
   const opacity = useTransform(scrollYProgress, [0, 0.95, 1], [1, 1, 0]);
-  const y = useTransform(scrollYProgress, [0, 0.95, 1], [0, 0, -50]);
 
   useEffect(() => {
     const loadImages = async () => {
@@ -122,7 +121,7 @@ export default function Home() {
           
           {/* TÍTULO HERO: ABSOLUTO PARA SOBREPONERSE A TODO */}
           <motion.div 
-            style={{ opacity, y }}
+            style={{ opacity }}
             className="absolute inset-0 z-[100] flex flex-col justify-center items-center px-6"
           >
             <div className="max-w-5xl space-y-4 md:space-y-8">
