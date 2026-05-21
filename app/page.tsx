@@ -1,6 +1,6 @@
 'use client';
 
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { useRef, useState, useEffect } from 'react';
 import { Rocket, Shield, Zap, ChevronDown } from 'lucide-react';
 import dynamic from 'next/dynamic';
@@ -19,30 +19,33 @@ export default function Home() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
   const imagesRef = useRef<HTMLImageElement[]>([]);
-  const [showContent, setShowContent] = useState(false);
-  const showContentRef = useRef(false);
   const [hasScrolled, setHasScrolled] = useState(false);
-  const hasScrolledRef = useRef(false);
   const frameCount = 150;
+
+  // Hook para controlar el scroll del contenedor hero
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // Animación del contenido: aparecer al 50% (0.5 a 0.8)
+  const opacity = useTransform(scrollYProgress, [0.4, 0.6], [0, 1]);
+  const y = useTransform(scrollYProgress, [0.4, 0.6], [50, 0]);
 
   useEffect(() => {
     // Precarga progresiva de imágenes
     const loadImages = async () => {
       const images: HTMLImageElement[] = [];
-      
-      // 1. Cargar el primer frame inmediatamente (prioritario para LCP)
       const firstImg = new Image();
       firstImg.src = `/frames/frame_0001.webp`;
       images[0] = firstImg;
       
-      // 2. Cargar los siguientes 20 frames rápidamente
       for (let i = 2; i <= 20; i++) {
         const img = new Image();
         img.src = `/frames/frame_${i.toString().padStart(4, '0')}.webp`;
         images[i - 1] = img;
       }
       
-      // 3. Cargar el resto de forma diferida en el background
       setTimeout(() => {
         for (let i = 21; i <= frameCount; i++) {
           const img = new Image();
@@ -50,7 +53,6 @@ export default function Home() {
           images[i - 1] = img;
         }
       }, 1000);
-      
       imagesRef.current = images;
     };
     loadImages();
@@ -60,7 +62,6 @@ export default function Home() {
     let animationFrameId: number;
     const canvas = canvasRef.current;
     const container = containerRef.current;
-    
     if (!canvas || !container) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
@@ -69,131 +70,55 @@ export default function Home() {
     let currentFrame = 0;
     let lastRenderedFrame = -1;
     
-    // Forzar redibujado en resize
     const updateCanvasSize = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
     };
     updateCanvasSize();
 
-    // Dibujar la primera imagen cuando cargue
-    if (imagesRef.current[0]) {
-      imagesRef.current[0].onload = () => {
-        updateCanvasSize();
-      }
-    }
-
     const renderLoop = () => {
-      // --- LERP DE SUAVIZADO SIN REBOTES (OSCILACIONES) ---
-      // Reemplazamos el modelo de física de resorte (que causaba rebotes y retrocesos molestos)
-      // por una interpolación lineal de primer orden (LERP). Esto garantiza matemáticamente
-      // cero sobreimpulso (overshoot) y una desaceleración perfectamente orgánica.
       const diff = targetFrame - currentFrame;
       currentFrame += diff * 0.12;
+      if (Math.abs(targetFrame - currentFrame) < 0.01) currentFrame = targetFrame;
       
-      // Auto-snap cuando está extremadamente cerca para evitar renders innecesarios
-      if (Math.abs(targetFrame - currentFrame) < 0.01) {
-        currentFrame = targetFrame;
-      }
-      
-      // Limitar a los bounds del frame
-      const frameIndex = Math.min(
-        frameCount - 1,
-        Math.max(0, Math.round(currentFrame))
-      );
-      
+      const frameIndex = Math.min(frameCount - 1, Math.max(0, Math.round(currentFrame)));
       const img = imagesRef.current[frameIndex];
       
-      // Pintar en canvas como 'object-cover'
-      if (img && img.complete && img.naturalWidth !== 0) {
-        const needsResize = canvas.width !== window.innerWidth || canvas.height !== window.innerHeight;
-        
-        // OPTIMIZACIÓN: Solo redibujar si cambió el frame o el tamaño de la ventana
-        if (frameIndex !== lastRenderedFrame || needsResize) {
-          if (needsResize) {
-            updateCanvasSize();
-          }
-          
+      if (img && img.complete) {
+        if (frameIndex !== lastRenderedFrame) {
           const hRatio = canvas.width / img.naturalWidth;
           const vRatio = canvas.height / img.naturalHeight;
           const ratio  = Math.max(hRatio, vRatio);
-          
           const centerShift_x = (canvas.width - img.naturalWidth * ratio) / 2;
           const centerShift_y = (canvas.height - img.naturalHeight * ratio) / 2;
           
-          // Desactivar el suavizado de imagen temporalmente durante el movimiento rápido puede mejorar FPS
-          // ctx.imageSmoothingEnabled = Math.abs(velocity) < 2; 
-          
           ctx.clearRect(0, 0, canvas.width, canvas.height);
-          ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight,
-                        centerShift_x, centerShift_y, img.naturalWidth * ratio, img.naturalHeight * ratio);
-                        
+          ctx.drawImage(img, 0, 0, img.naturalWidth, img.naturalHeight, centerShift_x, centerShift_y, img.naturalWidth * ratio, img.naturalHeight * ratio);
           lastRenderedFrame = frameIndex;
         }
       }
-      
       animationFrameId = requestAnimationFrame(renderLoop);
     };
 
     const handleScroll = () => {
       const rect = container.getBoundingClientRect();
-      const windowHeight = window.innerHeight;
-      const scrollDistance = container.offsetHeight - windowHeight;
-      const scrolled = -rect.top;
+      const scrollDistance = container.offsetHeight - window.innerHeight;
+      const progress = Math.max(0, Math.min(1, -rect.top / scrollDistance));
       
-      let progress = 0;
-      if (scrolled >= 0 && scrolled <= scrollDistance) {
-        progress = scrolled / scrollDistance;
-      } else if (scrolled > scrollDistance) {
-        progress = 1;
-      } else {
-        progress = 0;
-      }
+      const isMobile = window.innerWidth < 768;
+      targetFrame = progress * (frameCount - 1) * (isMobile ? 1.2 : 1);
 
-      // --- OPTIMIZACIÓN MÓVIL: Respuesta más rápida ---
-      const isMobile = typeof window !== 'undefined' && window.innerWidth < 768;
-      const sensitivity = isMobile ? 1.4 : 1; 
-      const adjustedProgress = Math.min(1, progress * sensitivity);
-
-      // Tiempo objetivo exacto basado en el progreso del scroll (0 a 149)
-      targetFrame = adjustedProgress * (frameCount - 1);
-      
-      // Lógica simplificada: Aparece al 20% de scroll y se queda estático
-      // Hemos corregido la lógica para que sea más estable y direccionalmente independiente
-      if (progress >= 0.2) {
-        if (!showContentRef.current) {
-          showContentRef.current = true;
-          setShowContent(true);
-        }
-      } else {
-        if (showContentRef.current) {
-          showContentRef.current = false;
-          setShowContent(false);
-        }
-      }
-
-      // Efecto de desaparecer el indicador (la flecha)
-      if (progress > 0.01 && !hasScrolledRef.current) {
-        hasScrolledRef.current = true;
-        setHasScrolled(true);
-      } else if (progress <= 0.01 && hasScrolledRef.current) {
-        hasScrolledRef.current = false;
-        setHasScrolled(false);
-      }
+      if (progress > 0.01 && !hasScrolled) setHasScrolled(true);
+      else if (progress <= 0.01 && hasScrolled) setHasScrolled(false);
     };
 
     window.addEventListener('scroll', handleScroll, { passive: true });
-    window.addEventListener('resize', handleScroll);
-    
     renderLoop();
-    handleScroll(); // Trigger initial state
-    
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
       cancelAnimationFrame(animationFrameId);
     };
-  }, []);
+  }, [hasScrolled]);
   return (
     <div className="w-full flex flex-col pt-0">
       
