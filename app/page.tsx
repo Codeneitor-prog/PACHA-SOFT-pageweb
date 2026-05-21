@@ -206,63 +206,62 @@ export default function Home() {
       {/* Dark Overlay global para que los textos sean legibles */}
       <div className="fixed inset-0 bg-black/40 pointer-events-none -z-10"></div>
 
-      {/* Hero Video Scrubbing Container */}
-      <section ref={containerRef} className="h-[500vh] md:h-[800vh] relative w-full overflow-x-hidden">
-        <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-center items-center text-center px-6 bg-transparent">
+      {/* TÍTULO HERO: SIEMPRE VISIBLE AL TOPE */}
+      <section className="relative w-full pt-32 pb-20 px-6 flex flex-col items-center text-center">
+        <motion.div 
+          className="max-w-5xl space-y-4 md:space-y-8 z-50 relative"
+          initial={{ opacity: 0, y: 50 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
+          <h1 className="text-3xl sm:text-4xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-2xl flex flex-col items-center gap-2">
+            <TypingText text="TRANSFORMA TU" className="inline-block" />
+            <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4 text-glow py-1 md:py-2 inline-block">
+              <TypingText text="PRESENCIA DIGITAL" delay={1} className="inline-block" />
+            </span>
+          </h1>
+          
+          <p className="text-sm md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-light tracking-wide drop-shadow-lg px-4">
+            Creamos experiencias web modernas y corporativas que impulsan tu negocio 
+            con tecnología de vanguardia y diseño de alto impacto.
+          </p>
+          
+          <div className="flex flex-wrap items-center justify-center gap-6 pt-8">
+            <a 
+              href="#contacto"
+              onClick={(e) => {
+                e.preventDefault();
+                document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
+              }}
+            >
+              <button className="btn-primary py-4 px-10 text-sm tracking-[0.2em] font-medium drop-shadow-lg hover:scale-105 transition-transform">
+                SOLICITAR COTIZACIÓN
+              </button>
+            </a>
+            <Link href="/portafolio">
+              <button className="relative group overflow-hidden py-4 px-10 rounded-full border border-electric-2/60 text-white text-sm tracking-[0.2em] font-medium transition-all duration-500 hover:border-electric-2 hover:bg-electric-2/10 backdrop-blur-sm">
+                <span className="relative z-10">VER PORTAFOLIO</span>
+              </button>
+            </Link>
+          </div>
+        </motion.div>
+      </section>
 
+      {/* Hero Video Scrubbing Container */}
+      <section ref={containerRef} className="h-[300vh] md:h-[500vh] relative w-full overflow-x-hidden -mt-40">
+        <div className="sticky top-0 w-full h-screen overflow-hidden flex flex-col justify-center items-center text-center px-6 bg-transparent">
+          {/* Indicador de scroll */}
           <motion.div
             initial={{ opacity: 1, scale: 0.9 }}
             animate={{ opacity: hasScrolled ? 0 : 1, scale: hasScrolled ? 1.1 : 1 }}
             transition={{ duration: 0.5 }}
-            className="absolute inset-0 m-auto flex flex-col items-center justify-center text-electric-2 z-20 pointer-events-none drop-shadow-[0_0_20px_rgba(0,229,255,0.8)]"
+            className="absolute bottom-20 m-auto flex flex-col items-center justify-center text-electric-2 z-20 pointer-events-none drop-shadow-[0_0_20px_rgba(0,229,255,0.8)]"
           >
             <span className="text-xs md:text-base font-bold uppercase tracking-[0.3em] mb-4 text-glow">
               Desliza hacia abajo
             </span>
             <div className="p-2 md:p-3 rounded-full bg-electric-2/10 border border-electric-2/30 backdrop-blur-sm animate-bounce">
               <ChevronDown className="w-6 h-6 md:w-10 md:h-10 text-electric-2" />
-            </div>
-          </motion.div>
-
-          <motion.div 
-            className="max-w-5xl space-y-4 md:space-y-8 z-50 relative"
-            initial={{ opacity: 0, y: 50 }}
-            animate={{ 
-              opacity: showContent ? 1 : 0, 
-              y: showContent ? 0 : 50,
-              pointerEvents: showContent ? 'auto' : 'none'
-            }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
-          >
-            <h1 className="text-3xl sm:text-4xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-2xl flex flex-col items-center gap-2">
-              <TypingText text="TRANSFORMA TU" className="inline-block" />
-              <span className="text-transparent bg-clip-text bg-linear-to-r from-electric-2 to-electric-4 text-glow py-1 md:py-2 inline-block">
-                <TypingText text="PRESENCIA DIGITAL" delay={1} className="inline-block" />
-              </span>
-            </h1>
-            
-            <p className="text-sm md:text-xl text-gray-200 max-w-2xl mx-auto leading-relaxed font-light tracking-wide drop-shadow-lg px-4">
-              Creamos experiencias web modernas y corporativas que impulsan tu negocio 
-              con tecnología de vanguardia y diseño de alto impacto.
-            </p>
-            
-            <div className="flex flex-wrap items-center justify-center gap-6 pt-8">
-              <a 
-                href="#contacto"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
-                }}
-              >
-                <button className="btn-primary py-4 px-10 text-sm tracking-[0.2em] font-medium drop-shadow-lg hover:scale-105 transition-transform">
-                  SOLICITAR COTIZACIÓN
-                </button>
-              </a>
-              <Link href="/portafolio">
-                <button className="relative group overflow-hidden py-4 px-10 rounded-full border border-electric-2/60 text-white text-sm tracking-[0.2em] font-medium transition-all duration-500 hover:border-electric-2 hover:bg-electric-2/10 backdrop-blur-sm">
-                  <span className="relative z-10">VER PORTAFOLIO</span>
-                </button>
-              </Link>
             </div>
           </motion.div>
         </div>
