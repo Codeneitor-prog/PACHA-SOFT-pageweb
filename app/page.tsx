@@ -158,14 +158,18 @@ export default function Home() {
       // Tiempo objetivo exacto basado en el progreso del scroll (0 a 149)
       targetFrame = adjustedProgress * (frameCount - 1);
       
-      // Efecto de mostrar contenido (textos)
-      const contentThreshold = isMobile ? 0.25 : 0.4;
-      if (progress > contentThreshold && !showContentRef.current) {
-        showContentRef.current = true;
-        setShowContent(true);
-      } else if (progress <= contentThreshold && showContentRef.current) {
-        showContentRef.current = false;
-        setShowContent(false);
+      // Lógica simplificada: Aparece al 20% de scroll y se queda estático
+      // Bajamos el umbral para asegurar que sea más fácil de activar
+      if (progress >= 0.2) {
+        if (!showContentRef.current) {
+          showContentRef.current = true;
+          setShowContent(true);
+        }
+      } else {
+        if (showContentRef.current) {
+          showContentRef.current = false;
+          setShowContent(false);
+        }
       }
 
       // Efecto de desaparecer el indicador (la flecha)
@@ -221,7 +225,7 @@ export default function Home() {
           </motion.div>
 
           <motion.div 
-            className="max-w-5xl space-y-4 md:space-y-8 z-10 relative"
+            className="max-w-5xl space-y-4 md:space-y-8 z-50 relative"
             initial={{ opacity: 0, y: 50 }}
             animate={{ 
               opacity: showContent ? 1 : 0, 
@@ -244,9 +248,11 @@ export default function Home() {
             
             <div className="flex flex-wrap items-center justify-center gap-6 pt-8">
               <a 
-                href="https://wa.me/59171902857?text=Hola,%20quisiera%20solicitar%20una%20cotizaci%C3%B3n." 
-                target="_blank" 
-                rel="noopener noreferrer"
+                href="#contacto"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.querySelector('#contacto')?.scrollIntoView({ behavior: 'smooth' });
+                }}
               >
                 <button className="btn-primary py-4 px-10 text-sm tracking-[0.2em] font-medium drop-shadow-lg hover:scale-105 transition-transform">
                   SOLICITAR COTIZACIÓN
