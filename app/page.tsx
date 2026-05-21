@@ -25,7 +25,7 @@ export default function Home() {
   });
 
   // Animación del contenido: se queda fijo (0-0.95) y sale al final
-  const opacity = useTransform(scrollYProgress, [0, 0.95, 1], [1, 1, 0]);
+  const opacity = useTransform(scrollYProgress, [0.9, 1], [1, 0]);
 
   useEffect(() => {
     const loadImages = async () => {
@@ -124,6 +124,7 @@ export default function Home() {
             style={{ opacity }}
             className="absolute inset-0 z-[100] flex flex-col justify-center items-center px-6"
           >
+
             <div className="max-w-5xl space-y-4 md:space-y-8">
               <h1 className="text-3xl sm:text-4xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-2xl flex flex-col items-center gap-2">
                 <TypingText text="TRANSFORMA TU" className="inline-block" />
