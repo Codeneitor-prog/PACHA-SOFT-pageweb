@@ -159,7 +159,7 @@ export default function Home() {
       targetFrame = adjustedProgress * (frameCount - 1);
       
       // Lógica simplificada: Aparece al 20% de scroll y se queda estático
-      // Bajamos el umbral para asegurar que sea más fácil de activar
+      // Hemos corregido la lógica para que sea más estable y direccionalmente independiente
       if (progress >= 0.2) {
         if (!showContentRef.current) {
           showContentRef.current = true;
@@ -212,14 +212,14 @@ export default function Home() {
 
           {/* TÍTULO HERO: INTEGRADO PARA APARECER AL 50% DEL SCROLL */}
           <motion.div 
-            className="max-w-5xl space-y-4 md:space-y-8 z-50 relative"
+            className="max-w-5xl space-y-4 md:space-y-8 z-[100] relative"
             initial={{ opacity: 0, y: 50 }}
             animate={{ 
               opacity: showContent ? 1 : 0, 
               y: showContent ? 0 : 50,
               pointerEvents: showContent ? 'auto' : 'none'
             }}
-            transition={{ duration: 0.8, ease: "easeOut" }}
+            transition={{ duration: 0.5, ease: "easeInOut" }}
           >
             <h1 className="text-3xl sm:text-4xl md:text-8xl font-black text-white leading-[1.1] tracking-tighter drop-shadow-2xl flex flex-col items-center gap-2">
               <TypingText text="TRANSFORMA TU" className="inline-block" />
