@@ -24,10 +24,9 @@ export default function Home() {
     offset: ["start start", "end end"]
   });
 
-  // Animación del contenido: Aparece al 40% (0.4) y se queda visible (1) hasta el final (1.0).
-  // Ya no desaparece hasta que la sección sticky termine naturalmente.
-  const opacity = useTransform(scrollYProgress, [0.35, 0.45], [0, 1]);
-  const y = useTransform(scrollYProgress, [0.35, 0.45], [20, 0]);
+  // Animación del contenido: se queda fijo (0-0.95) y sale al final
+  const opacity = useTransform(scrollYProgress, [0, 0.95, 1], [1, 1, 0]);
+  const y = useTransform(scrollYProgress, [0, 0.95, 1], [0, 0, -50]);
 
   useEffect(() => {
     const loadImages = async () => {
