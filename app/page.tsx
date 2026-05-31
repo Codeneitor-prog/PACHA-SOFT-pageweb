@@ -122,7 +122,7 @@ export default function Home() {
           {/* TÍTULO HERO: FIJO EN PANTALLA MIENTRAS DURE LA ANIMACIÓN */}
           <motion.div 
             style={{ opacity }}
-            className="fixed inset-0 z-[100] flex flex-col justify-center items-center px-6"
+            className="fixed inset-0 z-100 flex flex-col justify-center items-center px-6"
           >
 
             <div className="max-w-5xl space-y-4 md:space-y-8">
@@ -161,7 +161,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="relative z-20 bg-black/10 backdrop-blur-md pt-20 pb-12 border-t border-white/5">
+      <section className="relative z-20 bg-black/10 backdrop-blur-sm pt-20 pb-12 border-t border-white/5">
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 w-full max-w-6xl mx-auto px-6">
           {[
             { v: 50, s: '+', l: 'Proyectos Realizados' },
@@ -174,7 +174,7 @@ export default function Home() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.1, duration: 0.8 }}
+              transition={{ delay: i * 0.08, duration: 0.5 }}
               whileHover={{ y: -5, scale: 1.02 }}
               className="card-glass-hover p-8 rounded-2xl flex flex-col items-center justify-center text-center gap-3 relative overflow-hidden group"
             >
@@ -188,12 +188,12 @@ export default function Home() {
         </div>
       </section>
 
-      <div className="relative z-20 bg-gradient-to-b from-black/60 via-[#010312]/80 to-[#000000]/95 backdrop-blur-3xl">
+      <div className="relative z-20 bg-linear-to-b from-black/60 via-[#010312]/80 to-[#000000]/95 backdrop-blur-xl">
         <ProcessTimeline />
         <section className="py-32 relative">
           <div className="absolute inset-0 bg-linear-to-b from-transparent via-electric-6/5 to-transparent"></div>
           <div className="container mx-auto px-6 relative z-10">
-            <motion.div initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} className="text-center mb-20 space-y-6">
+            <motion.div initial={{ opacity: 0, y: 15 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.4 }} className="text-center mb-20 space-y-6">
               <h2 className="text-4xl md:text-6xl font-black text-white tracking-tighter">NUESTRO PORTAFOLIO</h2>
               <p className="text-gray-400 tracking-wider font-light">Diseños corporativos que marcan la diferencia</p>
             </motion.div>
@@ -214,7 +214,7 @@ export default function Home() {
                   initial={{ opacity: 0, y: 30 }}
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
-                  transition={{ delay: i * 0.2, duration: 0.8 }}
+                  transition={{ delay: i * 0.1, duration: 0.5 }}
                   className="card-glass-hover p-10 rounded-4xl space-y-6 group"
                 >
                   <div className="w-14 h-14 rounded-2xl bg-electric-2/10 flex items-center justify-center border border-electric-2/20 group-hover:bg-electric-2/20 transition-colors duration-500">
@@ -240,7 +240,7 @@ export default function Home() {
             initial={{ opacity: 0, scale: 0.95 }}
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 1, ease: [0.165, 0.84, 0.44, 1] }}
+            transition={{ duration: 0.6, ease: [0.165, 0.84, 0.44, 1] }}
             className="max-w-6xl mx-auto card-glass rounded-[3rem] p-16 md:p-24 flex flex-col items-center text-center gap-10 relative overflow-hidden"
           >
             <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-gradient-radial from-electric-6/20 to-transparent opacity-50 blur-[50px]"></div>

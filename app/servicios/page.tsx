@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import PageHero from '@/components/PageHero';
 import PageCTA from '@/components/PageCTA';
 import PricingSection from '@/components/PricingSection';

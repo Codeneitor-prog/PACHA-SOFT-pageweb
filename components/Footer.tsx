@@ -40,7 +40,7 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
             className="space-y-6"
           >
             <div className="flex items-center gap-4">
@@ -50,6 +50,7 @@ export default function Footer() {
                   alt="Pacha Soft Logo"
                   fill
                   className="object-contain"
+                  sizes="40px"
                 />
               </div>
               <h3 className="text-xl font-bold tracking-[0.2em] bg-clip-text text-transparent bg-gradient-to-r from-electric-1 via-electric-2 to-electric-4">PACHA SOFT</h3>
@@ -58,20 +59,18 @@ export default function Footer() {
               Agencia de desarrollo digital especializada en crear experiencias corporativas elegantes y funcionales.
             </p>
             
-            {/* Social Links */}
+            {/* Social Links - CSS hover instead of Framer Motion whileHover */}
             <div className="flex gap-4 pt-2">
               {socialLinks.map(({ name, icon: Icon, href, color }) => (
-                <motion.a
+                <a
                   key={name}
                   href={href}
                   target="_blank"
                   rel="noopener noreferrer"
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  whileTap={{ scale: 0.95 }}
-                  className={`w-10 h-10 rounded-full card-glass flex items-center justify-center text-gray-400 ${color} transition-all duration-300`}
+                  className={`w-10 h-10 rounded-full card-glass flex items-center justify-center text-gray-400 ${color} transition-all duration-200 hover:scale-110 hover:-translate-y-0.5 active:scale-95`}
                 >
                   <Icon size={18} />
-                </motion.a>
+                </a>
               ))}
             </div>
           </motion.div>
@@ -83,7 +82,7 @@ export default function Footer() {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
+              transition={{ duration: 0.4, delay: index * 0.08 }}
             >
               <h4 className="text-sm font-bold text-electric-2 tracking-[0.1em] uppercase mb-6">{title}</h4>
               <ul className="space-y-3">
@@ -91,9 +90,9 @@ export default function Footer() {
                   <li key={link.name}>
                     <Link
                       href={link.href}
-                      className="text-gray-400 font-light hover:text-white transition-colors duration-300 text-sm flex items-center group"
+                      className="text-gray-400 font-light hover:text-white transition-colors duration-200 text-sm flex items-center group"
                     >
-                      <span className="w-0 h-[1px] bg-electric-2 mr-0 group-hover:w-3 group-hover:mr-2 transition-all duration-300"></span>
+                      <span className="w-0 h-[1px] bg-electric-2 mr-0 group-hover:w-3 group-hover:mr-2 transition-all duration-200"></span>
                       {link.name}
                     </Link>
                   </li>
@@ -107,7 +106,7 @@ export default function Footer() {
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.3 }}
+            transition={{ duration: 0.4, delay: 0.2 }}
           >
             <h4 className="text-sm font-bold text-electric-2 tracking-[0.1em] uppercase mb-6">Contacto</h4>
             <ul className="space-y-4">
@@ -139,29 +138,19 @@ export default function Footer() {
 
         <div className="h-px w-full bg-gradient-to-r from-transparent via-electric-2/20 to-transparent mb-8"></div>
 
+        {/* Bottom bar - plain divs instead of motion.div (no animation needed for copyright text) */}
         <div className="flex flex-col md:flex-row justify-between items-center gap-4 text-gray-500 font-light text-xs tracking-wider">
-          <motion.p
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5 }}
-          >
+          <p>
             © 2025 Pacha Soft. Todos los derechos reservados.
-          </motion.p>
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex gap-6"
-          >
+          </p>
+          <div className="flex gap-6">
             <Link href="/privacidad" className="hover:text-electric-2 transition-colors">
               Política de Privacidad
             </Link>
             <Link href="/terminos" className="hover:text-electric-2 transition-colors">
               Términos y Condiciones
             </Link>
-          </motion.div>
+          </div>
         </div>
       </div>
     </footer>

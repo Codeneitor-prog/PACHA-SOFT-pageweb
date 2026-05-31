@@ -80,9 +80,9 @@ export default function SobreNosotrosPage() {
       {/* Hero Section */}
       <section className="container mx-auto px-6 mb-20 max-w-6xl">
         <motion.div
-          initial={{ filter: 'blur(10px)', opacity: 0, y: 30 }}
-          animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.165, 0.84, 0.44, 1] }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.165, 0.84, 0.44, 1] }}
           className="text-center max-w-4xl mx-auto"
         >
           <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em]">
@@ -106,7 +106,7 @@ export default function SobreNosotrosPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
+          transition={{ duration: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
           className="card-glass rounded-4xl p-10 md:p-16 relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-radial from-electric-2/5 to-transparent pointer-events-none"></div>
@@ -134,7 +134,7 @@ export default function SobreNosotrosPage() {
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
+            transition={{ duration: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
             className="card-glass-hover p-10 rounded-4xl relative group"
           >
             <div className="absolute top-0 right-0 p-8 opacity-10 group-hover:opacity-20 transition-opacity">
@@ -170,7 +170,7 @@ export default function SobreNosotrosPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
+          transition={{ duration: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
           className="text-center mb-16"
         >
           <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em] block mb-4">Lo que nos define</span>
@@ -212,7 +212,7 @@ export default function SobreNosotrosPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
+          transition={{ duration: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
           className="card-glass rounded-4xl p-10 md:p-16 border border-electric-2/20 relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-linear-to-br from-electric-4/5 to-transparent pointer-events-none"></div>
@@ -242,7 +242,7 @@ export default function SobreNosotrosPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
+          transition={{ duration: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
           className="text-center mb-16"
         >
           <h2 className="text-4xl md:text-5xl font-black mb-6 tracking-tighter text-white">
@@ -308,7 +308,7 @@ export default function SobreNosotrosPage() {
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, ease: [0.165, 0.84, 0.44, 1] }}
+          transition={{ duration: 0.6, ease: [0.165, 0.84, 0.44, 1] }}
           className="card-glass rounded-4xl p-16 text-center relative overflow-hidden"
         >
           <div className="absolute inset-0 bg-gradient-radial from-electric-4/10 to-transparent pointer-events-none"></div>

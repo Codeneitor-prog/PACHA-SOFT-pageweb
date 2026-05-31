@@ -155,7 +155,7 @@ export default function Portfolio3DCarousel() {
           <ChevronRight size={24} className="hover:translate-x-1 transition-transform" />
         </button>
 
-        <AnimatePresence mode="popLayout">
+        <AnimatePresence mode="sync">
           {items.map((item, index) => {
             const diff = (index - safeIndex + items.length) % items.length;
             const isCenter = diff === 0;
@@ -179,7 +179,7 @@ export default function Portfolio3DCarousel() {
               <motion.div
                 key={item.id}
                 animate={{ x, z, rotateY, opacity, scale, zIndex }}
-                transition={{ duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
+                transition={{ duration: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
                 className="absolute w-[320px] sm:w-[500px] md:w-[700px] lg:w-[800px] aspect-16/10"
                 style={{ pointerEvents: isCenter ? 'auto' : 'none' }}
               >

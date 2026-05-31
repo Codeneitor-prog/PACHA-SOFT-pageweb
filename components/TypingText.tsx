@@ -17,7 +17,7 @@ export default function TypingText({ text, className, delay = 0 }: TypingTextPro
     hidden: { opacity: 0 },
     visible: (i = 1) => ({
       opacity: 1,
-      transition: { staggerChildren: 0.05, delayChildren: delay * i },
+      transition: { staggerChildren: 0.08, delayChildren: delay * i },
     }),
   };
 
@@ -27,20 +27,23 @@ export default function TypingText({ text, className, delay = 0 }: TypingTextPro
       y: 0,
       transition: {
         type: "spring" as const,
-        damping: 12,
-        stiffness: 200,
+        damping: 15,
+        stiffness: 250,
       },
     },
     hidden: {
       opacity: 0,
-      y: 20,
+      y: 15,
       transition: {
         type: "spring" as const,
-        damping: 12,
-        stiffness: 200,
+        damping: 15,
+        stiffness: 250,
       },
     },
   };
+
+  // Split by words instead of characters to reduce DOM nodes drastically
+  const words = text.split(" ");
 
   return (
     <motion.p
@@ -50,9 +53,9 @@ export default function TypingText({ text, className, delay = 0 }: TypingTextPro
       animate={isInView ? "visible" : "hidden"}
       className={className}
     >
-      {text.split("").map((letter, index) => (
-        <motion.span key={index} variants={child}>
-          {letter === " " ? "\u00A0" : letter}
+      {words.map((word, index) => (
+        <motion.span key={index} variants={child} style={{ display: 'inline-block' }}>
+          {word}{index < words.length - 1 ? '\u00A0' : ''}
         </motion.span>
       ))}
     </motion.p>

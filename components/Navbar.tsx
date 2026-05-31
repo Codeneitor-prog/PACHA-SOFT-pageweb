@@ -29,8 +29,8 @@ export default function Navbar() {
     <motion.nav 
       initial={{ y: -100 }}
       animate={{ y: 0 }}
-      transition={{ duration: 0.8, ease: [0.165, 0.84, 0.44, 1] }}
-      className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
+      transition={{ duration: 0.5, ease: [0.165, 0.84, 0.44, 1] }}
+      className={`fixed top-0 left-0 w-full z-100 transition-all duration-500 ${
         isOpen 
           ? 'bg-black/95 backdrop-blur-2xl' 
           : isScrolled 
@@ -43,9 +43,9 @@ export default function Navbar() {
         <Link href="/" className="flex items-center gap-3 group relative">
           <div className="absolute inset-0 bg-electric-2/20 blur-xl rounded-full scale-0 group-hover:scale-150 transition-transform duration-700"></div>
           <div className="relative w-10 h-10">
-            <Image src="/img/pachaLog.png" alt="Logo" fill className="object-contain" priority />
+            <Image src="/img/pachaLog.png" alt="Logo" fill className="object-contain" sizes="40px" priority />
           </div>
-          <span className="text-xl font-bold tracking-[0.2em] bg-clip-text text-transparent bg-gradient-to-r from-electric-1 via-electric-2 to-electric-4">
+          <span className="text-xl font-bold tracking-[0.2em] bg-clip-text text-transparent bg-linear-to-r from-electric-1 via-electric-2 to-electric-4">
             PACHA SOFT
           </span>
         </Link>
@@ -56,11 +56,11 @@ export default function Navbar() {
             <Link 
               key={link.name} 
               href={link.href} 
-              className="relative text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-[0.1em] group"
+              className="relative text-sm font-medium text-gray-300 hover:text-white transition-colors uppercase tracking-widest group"
             >
               {link.name}
               <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-electric-2 group-hover:w-full transition-all duration-300 ease-out"></span>
-              <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-electric-2 blur-[4px] group-hover:w-full transition-all duration-300 ease-out opacity-0 group-hover:opacity-100"></span>
+              <span className="absolute -bottom-2 left-0 w-0 h-[2px] bg-electric-2 blur-xs group-hover:w-full transition-all duration-300 ease-out opacity-0 group-hover:opacity-100"></span>
             </Link>
           ))}
           <a href="https://wa.me/59171902857?text=Hola,%20me%20gustar%C3%ADa%20cotizar%20un%20proyecto." target="_blank" rel="noopener noreferrer">

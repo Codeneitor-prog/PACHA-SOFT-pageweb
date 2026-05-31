@@ -136,9 +136,9 @@ export default function ContactoPage() {
       {/* Hero Section */}
       <section className="container mx-auto px-4 mb-20">
         <motion.div
-          initial={{ filter: 'blur(10px)', opacity: 0, y: 30 }}
-          animate={{ filter: 'blur(0px)', opacity: 1, y: 0 }}
-          transition={{ duration: 1, ease: [0.165, 0.84, 0.44, 1] }}
+          initial={{ opacity: 0, y: 15 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4, ease: [0.165, 0.84, 0.44, 1] }}
           className="text-center max-w-4xl mx-auto"
         >
           <span className="text-electric-2 font-medium text-sm uppercase tracking-[0.2em]">

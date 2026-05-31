@@ -83,7 +83,7 @@ export default function RootLayout({
           dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
         />
       </head>
-      <body className={`${inter.variable} antialiased selection:bg-electric-4 selection:text-white overflow-x-hidden w-full`}>
+      <body className={`${inter.variable} antialiased selection:bg-electric-4 selection:text-white overflow-x-hidden w-full relative`}>
         <SmoothScroll>
           <div className="relative min-h-screen flex flex-col overflow-x-hidden">
             <ScrollToTop />

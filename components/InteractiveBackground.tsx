@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useEffect, useRef, useState } from 'react';
-import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
 
 interface Particle {
   x: number;
@@ -17,12 +16,6 @@ export default function InteractiveBackground() {
   const containerRef = useRef<HTMLDivElement>(null);
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0, viewportHeight: 0 });
-  const mouseX = useMotionValue(0);
-  const mouseY = useMotionValue(0);
-
-  const springConfig = { damping: 25, stiffness: 150 };
-  const smoothX = useSpring(mouseX, springConfig);
-  const smoothY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
     const updateDimensions = () => {
@@ -52,18 +45,12 @@ export default function InteractiveBackground() {
     }
 
     window.addEventListener('resize', updateDimensions);
-    const handleMouseMove = (e: MouseEvent) => {
-      mouseX.set(e.clientX);
-      mouseY.set(e.clientY);
-    };
-    window.addEventListener('mousemove', handleMouseMove);
 
     return () => {
       resizeObserver.disconnect();
       window.removeEventListener('resize', updateDimensions);
-      window.removeEventListener('mousemove', handleMouseMove);
     };
-  }, [mouseX, mouseY]);
+  }, []);
 
   useEffect(() => {
     const canvas = canvasRef.current;
@@ -92,8 +79,13 @@ export default function InteractiveBackground() {
     }
 
     let animationId: number;
+    
+    // Performance: disable shadowBlur (extremely expensive per-particle)
+    // Use globalCompositeOperation 'lighter' for additive glow effect instead
     const render = () => {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      ctx.globalCompositeOperation = 'lighter';
+      ctx.shadowBlur = 0;
       const now = Date.now();
 
       particles.forEach((p) => {
@@ -105,20 +97,16 @@ export default function InteractiveBackground() {
         ctx.beginPath();
         ctx.arc(p.x, currentY, p.size, 0, Math.PI * 2);
         ctx.fillStyle = `rgba(0, 229, 255, ${currentOpacity})`;
-        ctx.shadowBlur = p.size * 2;
-        ctx.shadowColor = 'rgba(0, 229, 255, 0.8)';
         ctx.fill();
       });
 
+      ctx.globalCompositeOperation = 'source-over';
       animationId = requestAnimationFrame(render);
     };
 
     render();
     return () => cancelAnimationFrame(animationId);
   }, [dimensions.width, dimensions.height]);
-
-  const parallaxX = useTransform(smoothX, [0, dimensions.width || 1000], [-15, 15]);
-  const parallaxY = useTransform(smoothY, [0, dimensions.viewportHeight || 1000], [-15, 15]);
 
   return (
     <div ref={containerRef} className="absolute inset-0 z-0 pointer-events-none overflow-hidden bg-[#000000]">
@@ -130,24 +118,16 @@ export default function InteractiveBackground() {
         }}
       />
       
-      {/* Grid 3D - FIJO para efecto horizonte */}
+      {/* Grid 3D - FIJO para efecto horizonte - CSS animation instead of Framer Motion */}
       <div className="fixed inset-0 overflow-hidden flex justify-center items-end" style={{ perspective: '800px' }}>
-        <motion.div 
-          className="absolute w-[300vw] h-[200vh] origin-bottom opacity-20"
+        <div 
+          className="absolute w-[300vw] h-[200vh] origin-bottom opacity-20 bg-grid-animate"
           style={{
             backgroundImage: 'linear-gradient(rgba(0, 229, 255, 0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 229, 255, 0.3) 1px, transparent 1px)',
             backgroundSize: '60px 60px',
             transform: 'rotateX(75deg) translateY(10%)',
             maskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 60%)',
             WebkitMaskImage: 'linear-gradient(to top, rgba(0,0,0,1) 0%, transparent 60%)',
-          }}
-          animate={{
-            backgroundPosition: ["0px 0px", "0px 60px"]
-          }}
-          transition={{
-            duration: 2.5,
-            repeat: Infinity,
-            ease: "linear"
           }}
         />
       </div>
@@ -157,29 +137,25 @@ export default function InteractiveBackground() {
 
       {/* Glows decorativos - ABSOLUTOS para que se muevan con el scroll */}
       <div className="absolute inset-0 overflow-hidden">
-        <motion.div
+        <div
           className="absolute w-[45rem] h-[45rem] rounded-full flex items-center justify-center top-[10%] left-[-15%]"
-          style={{ x: parallaxX, y: parallaxY }}
+          style={{ transform: `translate3d(var(--px, 0px), var(--py, 0px), 0)` }}
         >
           <div className="absolute w-[5rem] h-[5rem] bg-white rounded-full blur-[20px] opacity-20" />
           <div className="absolute w-[15rem] h-[15rem] bg-[#00e5ff] rounded-full blur-[60px] opacity-40" />
           <div className="absolute inset-0 bg-[#0091ea] rounded-full blur-[120px] opacity-20" />
-        </motion.div>
+        </div>
 
-        <motion.div
+        <div
           className="absolute w-[55rem] h-[55rem] rounded-full flex items-center justify-center top-[60%] right-[-20%]"
-          style={{ x: parallaxX, y: parallaxY }}
         >
           <div className="absolute w-[6rem] h-[6rem] bg-white rounded-full blur-[25px] opacity-15" />
           <div className="absolute w-[20rem] h-[20rem] bg-[#00e5ff] rounded-full blur-[80px] opacity-30" />
           <div className="absolute inset-0 bg-[#021abd] rounded-full blur-[140px] opacity-20" />
-        </motion.div>
+        </div>
 
-        <motion.div 
-          className="absolute w-[120vw] h-[120vw] border-t-[1px] border-[#00e5ff] rounded-full opacity-30 blur-[1px] top-[5%] left-[-10%]"
-          style={{ x: parallaxX }}
-          animate={{ rotate: [0, 5, 0] }}
-          transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        <div 
+          className="absolute w-[120vw] h-[120vw] border-t-[1px] border-[#00e5ff] rounded-full opacity-30 blur-[1px] top-[5%] left-[-10%] bg-arc-rotate"
         />
       </div>
     </div>

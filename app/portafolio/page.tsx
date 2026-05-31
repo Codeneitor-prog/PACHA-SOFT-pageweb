@@ -1,3 +1,5 @@
+export const revalidate = 60;
+
 import Portfolio3DCarousel from '@/components/Portfolio3DCarousel';
 import ProjectsGrid from '@/components/ProjectsGrid';
 import PageHero from '@/components/PageHero';
