@@ -1,4 +1,4 @@
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
 
 import PageHero from '@/components/PageHero';
 import PageCTA from '@/components/PageCTA';
